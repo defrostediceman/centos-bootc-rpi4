@@ -27,6 +27,7 @@ RUN dnf install -y \
 
 RUN groupadd -g 1000 iceman && \
     useradd -m -u 1000 -g iceman -G wheel iceman && \
+    echo "iceman" | passwd --stdin iceman && \
     echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/wheel && \
     chmod 0440 /etc/sudoers.d/wheel
 
