@@ -33,7 +33,7 @@ RUN groupadd -g 1000 iceman && \
     hostnamectl set-hostname centos-bootc-rpi4
 
 RUN mkdir -p /tmp/efi/boot/efi && \
-    dnf install -y --downloadonly --release=$RELEASE --forcearch=aarch64 --destdir=/tmp/efi/ uboot-images-armv8 bcm283x-firmware bcm283x-overlays && \
+    dnf install -y --downloadonly --release=9 --forcearch=aarch64 --destdir=/tmp/efi/ uboot-images-armv8 bcm283x-firmware bcm283x-overlays && \
     for rpm in /tmp/efi/*rpm; do rpm2cpio $rpm | cpio -idv -D /tmp/efi/; done && \
     mv /tmp/efi/usr/share/uboot/rpi_arm64/u-boot.bin /tmp/efi/boot/efi/rpi-u-boot.bin && \
     dnf clean all
