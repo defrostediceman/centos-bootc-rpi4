@@ -29,7 +29,8 @@ RUN groupadd -g 1000 iceman && \
     useradd -m -u 1000 -g iceman -G wheel iceman && \
     echo "iceman" | passwd --stdin iceman && \
     echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/wheel && \
-    chmod 0440 /etc/sudoers.d/wheel
+    chmod 0440 /etc/sudoers.d/wheel && \
+    hostnamectl set-hostname centos-bootc-rpi4
 
 RUN mkdir -p /tmp/efi/boot/efi && \
     dnf install -y --downloadonly --release=$RELEASE --forcearch=aarch64 --destdir=/tmp/efi/ uboot-images-armv8 bcm283x-firmware bcm283x-overlays && \
