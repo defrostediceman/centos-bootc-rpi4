@@ -1,0 +1,14 @@
+# Create cleanup service
+[Unit]
+Description=Remove filesystem growth tools
+After=grow-fs.service
+ConditionPathExists=/var/lib/grow-fs-done
+ConditionPathExists=!/var/lib/cleanup-done
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'dnf remove -y cloud-utils-growpart xfsprogs && touch /var/lib/cleanup-done'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

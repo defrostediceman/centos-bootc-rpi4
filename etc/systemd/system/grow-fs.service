@@ -1,0 +1,13 @@
+[Unit]
+Description=Expand Root Filesystem
+DefaultDependencies=no
+Before=local-fs.target
+ConditionPathExists=!/var/lib/grow-fs-done
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'growpart /dev/mmcblk0 2 && xfs_growfs / && touch /var/lib/grow-fs-done'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
