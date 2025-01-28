@@ -21,3 +21,16 @@ sudo podman run \
    --rootfs xfs \
    ghcr.io/defrostediceman/centos-bootc-rpi4
 ```
+
+## ARM image installer
+
+Now we've built our RAW image, we now use the Fedora (or Raspberry Pi) ARM Image Installer to flash the image onto the RPI4 with the following command:
+```bash
+$ sudo arm-image-installer \
+--image=</path/to/RAW_image> \
+--target=rpi4 \ # rpi4, rpi3, rpi2
+--media=/dev/__<sd_card_device> \ # /dev/sdX or /dev/mmcblkX. The lsblk command should help you identify your micro-SD card.
+--resizefs
+```
+
+The SD card should now be ready to use with your Raspberry Pi 4. You can check the contents of the SD card by mounting it and checking the /boot/ folder.
